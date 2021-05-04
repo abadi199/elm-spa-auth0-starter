@@ -1,0 +1,23 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "> 🌳  built with [elm-spa](https://elm-spa.dev)",
+  "main": "index.js",
+  "scripts": {
+    "parcel": "parcel public/index.html",
+    "start": "concurrently \"elm-spa watch\" \"parcel public/index.html\"",
+    "postinstall": "sed -i.bak 's_\"//# sourceMappingURL=\"_\"//# source\"+\"MappingURL=\"_' node_modules/@auth0/auth0-spa-js/dist/*.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@auth0/auth0-spa-js": "^1.15.0",
+    "concurrently": "^6.0.2",
+    "cypress": "^7.2.0",
+    "elm-hot": "^1.1.6",
+    "node-elm-compiler": "^5.0.6",
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-interpolate-html": "^1.0.3",
+    "typescript": "^4.2.4"
+  }
+}

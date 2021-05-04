@@ -1,0 +1,7 @@
+{
+  "include": ["public/**/*"],
+  "compilerOptions": {
+    "lib": ["es2019", "dom"],
+    "target": "es2015"
+  }
+}
