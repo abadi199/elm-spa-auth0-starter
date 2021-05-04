@@ -1,5 +1,6 @@
 module Pages.Home_ exposing (Model, Msg, page)
 
+import Cred exposing (Cred)
 import Effect exposing (Effect)
 import Gen.Params.Home_ exposing (Params)
 import Page
@@ -11,10 +12,10 @@ import View exposing (View)
 page : Shared.Model -> Request.With Params -> Page.With Model Msg
 page shared req =
     Page.protected.advanced
-        (\user ->
+        (\cred ->
             { init = init
             , update = update
-            , view = view user
+            , view = view cred
             , subscriptions = subscriptions
             }
         )
@@ -61,6 +62,6 @@ subscriptions model =
 -- VIEW
 
 
-view : Shared.User -> Model -> View Msg
-view user model =
-    View.placeholder <| "Welcome, " ++ user.username
+view : Cred -> Model -> View Msg
+view cred model =
+    View.placeholder <| "Welcome, " ++ Cred.toString cred

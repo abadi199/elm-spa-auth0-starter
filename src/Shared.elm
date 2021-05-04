@@ -2,49 +2,76 @@ module Shared exposing
     ( Flags
     , Model
     , Msg(..)
-    , User
+    , getCred
     , init
     , subscriptions
     , update
     )
 
+import Config exposing (Config)
+import Cred exposing (Cred)
 import Gen.Route
-import Json.Decode as Json
+import Json.Decode as JD
 import Request exposing (Request)
 
 
 type Msg
-    = SignIn User
-    | SignOut
+    = NoOp
 
 
 type alias Flags =
-    Json.Value
+    JD.Value
 
 
-type alias Model =
-    { user : Maybe User }
+type Model
+    = WithCred Cred Config
+    | NoCred Config
+    | Error JD.Error
 
 
-type alias User =
-    { username : String }
+getCred : Model -> Maybe Cred
+getCred model =
+    case model of
+        WithCred cred _ ->
+            Just cred
+
+        NoCred _ ->
+            Nothing
+
+        Error _ ->
+            Nothing
 
 
 init : Request -> Flags -> ( Model, Cmd Msg )
-init _ _ =
-    ( { user = Nothing }, Cmd.none )
+init _ flags =
+    case ( Cred.fromJson flags, Config.fromJson flags ) of
+        ( Just (Result.Ok cred), Result.Ok config ) ->
+            ( WithCred cred config, Cmd.none )
+
+        ( Nothing, Result.Ok config ) ->
+            ( NoCred config, Cmd.none )
+
+        ( Just (Result.Err error), _ ) ->
+            ( Error error, Cmd.none )
+
+        ( _, Result.Err error ) ->
+            ( Error error, Cmd.none )
 
 
 update : Request -> Msg -> Model -> ( Model, Cmd Msg )
 update req msg model =
     case msg of
-        SignIn user ->
-            ( { model | user = Just user }
-            , Request.pushRoute Gen.Route.Home_ req
-            )
+        NoOp ->
+            ( model, Cmd.none )
 
-        SignOut ->
-            ( { model | user = Nothing }, Cmd.none )
+
+
+-- SignIn cred ->
+--     (
+--     , Request.pushRoute Gen.Route.Home_ req
+--     )
+-- SignOut ->
+--     ( { model | user = Nothing }, Cmd.none )
 
 
 subscriptions : Request -> Model -> Sub Msg
