@@ -3,7 +3,10 @@ module Pages.Home_ exposing (Model, Msg, page)
 import Cred exposing (Cred)
 import Effect exposing (Effect)
 import Gen.Params.Home_ exposing (Params)
+import Html
+import Html.Events
 import Page
+import Port
 import Request
 import Shared
 import View exposing (View)
@@ -39,14 +42,14 @@ init =
 
 
 type Msg
-    = ReplaceMe
+    = ClickedSignOut
 
 
 update : Msg -> Model -> ( Model, Effect Msg )
 update msg model =
     case msg of
-        ReplaceMe ->
-            ( model, Effect.none )
+        ClickedSignOut ->
+            ( model, Port.send Port.Logout |> Effect.fromCmd )
 
 
 
@@ -64,4 +67,9 @@ subscriptions model =
 
 view : Cred -> Model -> View Msg
 view cred model =
-    View.placeholder <| "Welcome, " ++ Cred.toString cred
+    { title = "Elm Spa Auth0 Starter"
+    , body =
+        [ Html.h1 [] [ Html.text ("Welcome, " ++ Cred.toString cred) ]
+        , Html.button [ Html.Events.onClick ClickedSignOut ] [ Html.text "Logout" ]
+        ]
+    }

@@ -44,7 +44,10 @@ window.onload = async () => {
     name: userInfo?.name,
     family_name: "",
     given_name: "",
+    api_url: "",
   };
+
+  console.log("flags", flags);
   const elm = Elm.Main.init({
     flags,
   });

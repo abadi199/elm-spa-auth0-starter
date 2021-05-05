@@ -10,7 +10,6 @@ module Shared exposing
 
 import Config exposing (Config)
 import Cred exposing (Cred)
-import Gen.Route
 import Json.Decode as JD
 import Request exposing (Request)
 

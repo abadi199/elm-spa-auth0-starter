@@ -1,5 +1,6 @@
 module Pages.SignIn exposing (Model, Msg, page)
 
+import Cred exposing (Cred)
 import Effect exposing (Effect)
 import Gen.Params.SignIn exposing (Params)
 import Html
@@ -16,7 +17,7 @@ page shared req =
     Page.advanced
         { init = init
         , update = update
-        , view = view
+        , view = view shared
         , subscriptions = subscriptions
         }
 
@@ -64,12 +65,13 @@ subscriptions model =
 -- VIEW
 
 
-view : Model -> View Msg
-view model =
+view : Shared.Model -> Model -> View Msg
+view shared model =
     { title = "Sign In"
     , body =
         [ Html.button
             [ Events.onClick ClickedSignIn ]
-            [ Html.text "Sign in" ]
+            [ Html.text "Sign in"
+            ]
         ]
     }
