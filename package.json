@@ -1,7 +1,7 @@
 {
-  "name": "y",
+  "name": "elm-spa-auth0-starter",
   "version": "1.0.0",
-  "description": "> 🌳  built with [elm-spa](https://elm-spa.dev)",
+  "description": "Starter project for Elm Spa and Auth0",
   "main": "index.js",
   "scripts": {
     "parcel": "parcel public/index.html",
