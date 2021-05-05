@@ -1,21 +1,22 @@
-# my new project
-> 🌳  built with [elm-spa](https://elm-spa.dev)
+# Elm Spa + Auth0 Starter Project
+
+> 🌳 built with [elm-spa](https://elm-spa.dev)
 
 ## dependencies
 
 This project requires the latest LTS version of [Node.js](https://nodejs.org/)
 
 ```bash
-npm install -g elm elm-spa
+npm install
 ```
 
 ## running locally
 
 ```bash
-elm-spa server  # starts this app at http:/localhost:1234
+npm start
 ```
 
-### other commands
+### Elm Spa commands
 
 ```bash
 elm-spa add    # add a new page to the application
@@ -23,6 +24,6 @@ elm-spa build  # production build
 elm-spa watch  # runs build as you code (without the server)
 ```
 
-## learn more
+## Learn More
 
-You can learn more at [elm-spa.dev](https://elm-spa.dev)
+You can learn more about Elm Spa at [elm-spa.dev](https://elm-spa.dev)
