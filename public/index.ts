@@ -44,7 +44,7 @@ window.onload = async () => {
     name: userInfo?.name,
     family_name: "",
     given_name: "",
-    api_url: "",
+    api_url: (window as any).config.api_url,
   };
 
   console.log("flags", flags);
