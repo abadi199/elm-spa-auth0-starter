@@ -13,7 +13,7 @@ Starter Project for Elm with Elm Spa and Auth0
 
 - Copy `.env.examples` into `.env` and fill out all environment variables with proper values. This is needed to inject secrets into our Elm app.
 
-- Copy `cypress.env.json..examples` into `cypress.env.json` and fill out all field with proper values. This is needed to properly authenticate with Auth0 in our Cypress test.
+- Copy `cypress.env.json.examples` into `cypress.env.json` and fill out all field with proper values. This is needed to properly authenticate with Auth0 in our Cypress test.
 
 ## Running Locally
 
