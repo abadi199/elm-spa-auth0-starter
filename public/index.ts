@@ -9,9 +9,6 @@ const getCookie = (name: string): string => {
 
 const configureClient = async () => {
   const config = (window as any).config;
-  // if (window["Cypress"]) {
-  config.cacheLocation = "localstorage";
-  // }
   const auth0 = await createAuth0Client(config);
   return auth0;
 };
@@ -29,24 +26,13 @@ const logout = (auth0) => {
 };
 
 window.onload = async () => {
-  // console.log(
-  //   "before",
-  //   localStorage.getItem(
-  //     "@@auth0spajs@@::YnhZrIjqLwvxEt2FJp2sgG6EVgXjQ6QH::https://tagcloudio.auth0.com/api/v2/::openid profile email"
-  //   )
-  // );
-  // return;
   const auth0 = await configureClient();
-  // console.log(
-  //   "after",
-  //   localStorage.getItem(
-  //     "@@auth0spajs@@::YnhZrIjqLwvxEt2FJp2sgG6EVgXjQ6QH::https://tagcloudio.auth0.com/api/v2/::openid profile email"
-  //   )
-  // );
-  const isAuthenticated = await auth0.isAuthenticated();
-  let token: string | null = getCookie("token");
 
-  if (!token) {
+  let token: string | null = getCookie("noodle-token");
+  let userInfo = JSON.parse(getCookie("noodle-user"));
+
+  if (!token || !userInfo) {
+    const isAuthenticated = await auth0.isAuthenticated();
     if (!isAuthenticated) {
       const query = window.location.search;
       if (query.includes("code=") && query.includes("state=")) {
@@ -57,9 +43,11 @@ window.onload = async () => {
     } else {
       token = await auth0.getTokenSilently();
     }
-  }
 
-  const userInfo = await auth0.getUser();
+    if (!userInfo) {
+      userInfo = await auth0.getUser();
+    }
+  }
 
   const flags = {
     token,
@@ -71,7 +59,6 @@ window.onload = async () => {
     api_url: (window as any).config.api_url,
   };
 
-  console.log("flags", flags);
   const elm = Elm.Main.init({
     flags,
   });

@@ -1,29 +1,40 @@
 # Elm Spa + Auth0 Starter Project
 
-> 🌳 built with [elm-spa](https://elm-spa.dev)
+Starter Project for Elm with Elm Spa and Auth0
 
-## dependencies
+## Tech Stack
 
-This project requires the latest LTS version of [Node.js](https://nodejs.org/)
+- [Elm](https://elm-lang.org)
+- [Elm Spa](https://elm-spa.dev)
+- [Auth0](https://auth0.com)
+- [Cypress](https://cypress.io)
+
+## Configure Environment
+
+- Copy `.env.examples` into `.env` and fill out all environment variables with proper values. This is needed to inject secrets into our Elm app.
+
+- Copy `cypress.env.json..examples` into `cypress.env.json` and fill out all field with proper values. This is needed to properly authenticate with Auth0 in our Cypress test.
+
+## Running Locally
+
+Make sure to install all of our dependencies by running:
 
 ```bash
 npm install
 ```
 
-## running locally
+To start our parcel development server:
 
 ```bash
 npm start
 ```
 
-### Elm Spa commands
+## Running Cypress Test
+
+To start Cypress Test targeting local server:
 
 ```bash
-elm-spa add    # add a new page to the application
-elm-spa build  # production build
-elm-spa watch  # runs build as you code (without the server)
+npm test
 ```
 
-## Learn More
-
-You can learn more about Elm Spa at [elm-spa.dev](https://elm-spa.dev)
+This will open a cypress dashboard.
