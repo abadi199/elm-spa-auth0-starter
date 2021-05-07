@@ -4,8 +4,11 @@
   "description": "Starter project for Elm Spa and Auth0",
   "main": "index.js",
   "scripts": {
-    "start": "parcel public/index.html",
+    "start": "concurrently \"elm-spa watch\" \"parcel public/index.html\"",
     "test": "concurrently \"elm-spa watch\" \"parcel public/index.html --no-hmr\" \"cypress open\"",
+    "build": "npm run build:elm-spa && npm run build:parcel",
+    "build:elm-spa": "elm-spa build",
+    "build:parcel": "parcel build public/index.html",
     "postinstall": "sed -i.bak 's_\"//# sourceMappingURL=\"_\"//# source\"+\"MappingURL=\"_' node_modules/@auth0/auth0-spa-js/dist/*.js"
   },
   "author": "",
