@@ -19,6 +19,7 @@
     "concurrently": "^6.0.2",
     "cypress": "^7.2.0",
     "elm-hot": "^1.1.6",
+    "elm-spa": "^6.0.3",
     "jwt-decode": "^3.1.2",
     "node-elm-compiler": "^5.0.6",
     "parcel-bundler": "^1.12.5",
